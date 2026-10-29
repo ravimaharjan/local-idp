@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+# private signing keys -- never commit
+keys/
+.pytest_cache/

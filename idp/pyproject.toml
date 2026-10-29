@@ -1,0 +1,36 @@
+[project]
+name = "local-idp"
+version = "0.1.0"
+description = "Learning identity provider: OAuth2 authorization server with OpenID Connect"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.9",
+    "psycopg[binary]>=3.2",
+    "psycopg-pool>=3.2",
+    "python-dotenv>=1.0",
+    "bcrypt>=4.2",
+    "pyjwt[crypto]>=2.9",
+]
+
+[project.scripts]
+local-idp = "local_idp.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "httpx>=0.27",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.17,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "local_idp"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

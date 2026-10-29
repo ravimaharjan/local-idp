@@ -1,0 +1,31 @@
+# --- secrets: never commit ---
+.env
+.env.*
+!.env.example
+# the IdP's private signing keys
+keys/
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- editors / OS ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- logs ---
+*.log

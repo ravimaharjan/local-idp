@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not user %}
+  <h1>Todos</h1>
+  <p class="sub">Sign in with the identity provider to see your list.</p>
+  <a class="button" href="/login">Sign in</a>
+{% else %}
+  <header>
+    <div>
+      <h1>Todos</h1>
+      <p>Signed in as {{ user }}</p>
+    </div>
+    <form method="post" action="/logout">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <button class="quiet" type="submit">Sign out</button>
+    </form>
+  </header>
+
+  {% if not can_read %}
+    <p class="note">Your sign-in does not include permission to read todos.</p>
+  {% else %}
+    {% if can_write %}
+    <form class="add" method="post" action="/ui/todos">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="text" name="title" placeholder="What needs doing?" maxlength="200" autofocus required>
+      <button type="submit">Add</button>
+    </form>
+    {% else %}
+    <p class="note">Read-only: your sign-in does not include permission to change todos.</p>
+    {% endif %}
+
+    {% if todos %}
+    <ul>
+      {% for todo in todos %}
+      <li class="{{ 'done' if todo.done }}">
+        <span class="title">{{ todo.title }}</span>
+        {% if can_write %}
+        <form method="post" action="/ui/todos/{{ todo.id }}/toggle">
+          <input type="hidden" name="csrf" value="{{ csrf }}">
+          <button class="quiet" type="submit">{{ 'Undo' if todo.done else 'Done' }}</button>
+        </form>
+        <form method="post" action="/ui/todos/{{ todo.id }}/delete">
+          <input type="hidden" name="csrf" value="{{ csrf }}">
+          <button class="quiet" type="submit">Delete</button>
+        </form>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">Nothing here yet.</p>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cannot sign in</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f6f7f9; --card:#fff; --text:#1c2230; --muted:#667085; --line:#d0d5dd; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#12151c; --card:#1b2030; --text:#e8ebf2; --muted:#98a2b3; --line:#38405a; } }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text); font:16px/1.5 system-ui, sans-serif; }
+  main { width:min(24rem, calc(100vw - 2rem)); background:var(--card); border:1px solid var(--line); border-radius:12px; padding:2rem; }
+  h1 { margin:0 0 .5rem; font-size:1.25rem; }
+  p { margin:0; color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Cannot sign in</h1>
+  <p>{{ message }}</p>
+</main>
+</body>
+</html>

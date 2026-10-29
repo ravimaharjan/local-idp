@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Todos{% endblock %}</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f6f7f9; --card:#fff; --text:#1c2230; --muted:#667085; --line:#d0d5dd; --brand:#2f5be7; --err:#b42318; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#12151c; --card:#1b2030; --text:#e8ebf2; --muted:#98a2b3; --line:#38405a; --brand:#7a9bff; --err:#ff8b80; } }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); font:16px/1.5 system-ui, sans-serif; }
+  main { width:min(36rem, calc(100vw - 2rem)); margin:3rem auto; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:2rem; }
+  h1 { margin:0 0 .25rem; font-size:1.5rem; }
+  p.sub { margin:0 0 1.5rem; color:var(--muted); font-size:.9rem; }
+  header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; }
+  header p { margin:0; color:var(--muted); font-size:.9rem; }
+  form { margin:0; }
+  button, .button { padding:.55rem .9rem; font:inherit; font-weight:600; color:#fff; background:var(--brand); border:0; border-radius:8px; cursor:pointer; text-decoration:none; display:inline-block; }
+  button.quiet { color:var(--text); background:transparent; border:1px solid var(--line); font-weight:500; padding:.3rem .6rem; font-size:.85rem; }
+  input[type=text] { flex:1; padding:.55rem .7rem; font:inherit; color:inherit; background:transparent; border:1px solid var(--line); border-radius:8px; }
+  input:focus { outline:2px solid var(--brand); outline-offset:1px; }
+  .add { display:flex; gap:.5rem; margin-bottom:1.25rem; }
+  ul { list-style:none; margin:0; padding:0; }
+  li { display:flex; align-items:center; gap:.5rem; padding:.6rem 0; border-top:1px solid var(--line); }
+  li .title { flex:1; }
+  li.done .title { text-decoration:line-through; color:var(--muted); }
+  .empty, .note { color:var(--muted); font-size:.9rem; }
+  .error { color:var(--err); }
+</style>
+</head>
+<body>
+<main>
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

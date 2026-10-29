@@ -1,0 +1,24 @@
+# The identity provider's own Postgres. Separate container, volume, port and database from any other you run.
+services:
+  idp-db:
+    image: postgres:16-alpine
+    container_name: local-idp
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${IDP_DB_USER:?set IDP_DB_USER in .env}
+      POSTGRES_PASSWORD: ${IDP_DB_PASSWORD:?set IDP_DB_PASSWORD in .env}
+      POSTGRES_DB: ${IDP_DB_NAME:?set IDP_DB_NAME in .env}
+    ports:
+      - "${IDP_DB_PORT:-5435}:5432"
+    volumes:
+      - idp_db_data:/var/lib/postgresql/data
+      - ./db/schema:/schema-source:ro
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${IDP_DB_USER} -d ${IDP_DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  idp_db_data:
